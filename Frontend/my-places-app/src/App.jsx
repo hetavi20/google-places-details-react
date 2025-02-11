@@ -4,7 +4,7 @@ import GooglePlacesAutocomplete from "./GooglePlacesAutocomplete";
 function App() {
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Google Places Details</h1>
+      <h1 style={styles.title}>Google Places Autocomplete</h1>
       <GooglePlacesAutocomplete />
     </div>
   );

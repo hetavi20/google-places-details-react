@@ -24,8 +24,10 @@ function GooglePlacesAutocomplete() {
 
   const fetchPlaceDetails = async (placeId) => {
     try {
+      console.log("Fetching details for:", placeId);
       const response = await fetch(`https://localhost:7077/api/places/place-details?placeId=${placeId}`);
       const data = await response.json();
+      console.log("Fetched place details:", data);
       setPlaceDetails(data);
     } catch (error) {
       console.error("Error fetching place details:", error);
@@ -70,11 +72,13 @@ function GooglePlacesAutocomplete() {
         </div>
       )}
 
-      {placeDetails && (
+      {placeDetails ? (
         <div style={styles.placeDetails}>
-          <strong>Place Details:</strong>
+          <h3>Place Details</h3>
           <pre style={styles.jsonDisplay}>{JSON.stringify(placeDetails, null, 2)}</pre>
         </div>
+      ) : (
+        <p style={styles.noDetails}>No place details available.</p>
       )}
     </div>
   );
@@ -138,7 +142,7 @@ const styles = {
     borderRadius: "6px",
     border: "1px solid #ddd",
     width: "100%",
-    maxWidth: "600px", // Ensures it doesn’t take full screen width
+    maxWidth: "600px",
   },
   jsonDisplay: {
     whiteSpace: "pre-wrap",
@@ -149,6 +153,11 @@ const styles = {
     borderRadius: "6px",
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
     width: "100%",
+  },
+  noDetails: {
+    marginTop: "10px",
+    fontSize: "14px",
+    color: "#777",
   },
 };
 
